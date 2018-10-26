@@ -1,5 +1,5 @@
 #!/bin/bash
-#Script for bulk ssl installations
+#Script for bulk ssl installation
 
 FILE=$1
 
