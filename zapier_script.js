@@ -1,4 +1,4 @@
-return {
+return { 
 	string: 'https://lucaccounts.force1.awdev.ca/site-creation?i='
 			+encodeURIComponent( 
 				Buffer.from(
