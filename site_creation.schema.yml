@@ -1,0 +1,91 @@
+aw_site_creation.site_creation.*:
+  type: config_entity
+  label: Site Creation Config
+  mapping:
+    id:
+      type: string
+      label: ID
+    label:
+      type: label
+      label: Label
+    address:
+      type: address
+      label: Address
+
+		address:
+		  country_code: US
+		  langcode: ''
+		  given_name: Lucas
+		  family_name: Evil
+		  organization: 'Big Name Corporate'
+		  address_line1: '123 Fake Street'
+		  address_line2: ''
+		  locality: Fakington
+		  administrative_area: CA
+		  postal_code: '90210'
+		  additional_name: null
+		  sorting_code: null
+		  dependent_locality: null
+
+
+
+	primary_color:
+      type: color_hex
+      label: Primary Color
+    secondary_color:
+      type: color_hex
+      label: Secondary Color
+    logo:
+      type: sequence
+      label: Logo
+      sequence:
+        type: string
+    logo_path:
+      type: uri
+      label: Logo Path
+    email:
+      type: email
+      label: Company Email
+    hubspot_id:
+      type: string
+      label: Hubspot ID
+    hubspot_deal_id:
+      type: string
+      label: Hubspot Deal ID
+    fax:
+      type: string
+      label: Fax Number
+    phone:
+      type: string
+      label: Phone Number
+    bd:
+      type: boolean
+      label: Broker Dealer
+    bd_company:
+      type: string
+      label: Broker Dealer Company
+    bd_company_custom:
+      type: string
+      label: Custom Broker Dealer
+    team_size:
+      type: string
+      label: Team Size
+    target_audience:
+      type: sequence
+      label: Target Audience
+      sequence:
+        type: string
+    services:
+      type: sequence
+      label: Services
+      sequence:
+        type: string
+    template:
+      type: string
+      label: Template
+    converted:
+      type: boolean
+      label: Converted Site
+    debug:
+      type: boolean
+      label: Debug (do not build site)
