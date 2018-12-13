@@ -1,39 +1,42 @@
+var country = inputData.Company;
+
+if (country == "Canada"){
+
+		country = "Canada";
+
+} else if (country == "USA"){
+		country ="US";
+}
+
+
+
 return { 
 	string: 'https://lucaccounts.force1.awdev.ca/site-creation?i='
 			+encodeURIComponent( 
 				Buffer.from(
 					
 					//inputData object is string data from zapier integration
-					
-					+'{'
-					+	'"email": "'          + inputData.email           + '", '
-				    +	'"hubspot_deal_id": "'+ inputData.hupspot_deal_id + '", '
-				    +	'"hupspot_id": "'     + inputData.hubspot_id      + '"  ' // removed comma for last element
-				
-				 
-					+ '"address": ['   
-					+   '{'	
-					+		   '"country_code": "'+ inputData.country+ '",'
-                    +          '"langcode": "'    + /*TODO*/ +         '",'
-                    +          '"given_name": "'  + /*TODO*/ +         '",'
-                    +          '"family_name": "' + /*TODO*/ +         '",'
-                    +          '"organization": "' +/*TODO*/ +         '",'
-                    +          '"address_line1": "'+/*TODO*/ +         '",'
-                    +          '"address_line2": "'+/*TODO*/ +         '",'
-                    +          '"locality": "'     +/*TODO*/ +         '",'
-                    +          '"admistrative_area": "' + /*TODO*/ +   '",'
-                    +          '"postal_code": "' + /*TODO*/ +         '",'
-					+		   '"street": "' + inputData.street + '",'
-					+		   '"postal": "' + inputData.postal + '",'
-
-
-					+    '}'
-					+  ']'
-					
-//					
-					
-					+ '}'
-					
+		`{
+                            "id": "${inputData.company}",
+                            "label": "${inputData.company}",
+                            "hubspot_deal_id": "${inputData.hubspot_deal_id}",
+                            "hubspot_id": "${inputData.hubspot_id}",
+                            "address": [
+                                {"country_code": "${country}"},
+                                {"langcode": ""},
+                                {"given_name": "${inputData.given_name}"},
+                                {"family_name": "${inputData.family_name}"},
+                                {"organization": "${inputData.company}"},
+                                {"address_line1": "${inputData.street_address}"},
+                                {"address_line2": ""},
+                                {"locality": "${inputData.city}"},
+                                {"administrative_area": "${inputData.state_region}"},
+                                {"postal_code": "${inputData.postal_zip}"}
+                                ],
+                            "email": "${inputData.email}",
+                            "fax": "${inputData.fax}",
+                            "phone": "${inputData.phone}"
+          }`		
 				).toString('base64')
 			)
 	};
