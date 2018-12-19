@@ -1,42 +1,58 @@
-var country = inputData.Company;
+var country = "CA";
 
-if (country == "Canada"){
+let hubspotInfo = {};
+let org = inputData.organization.replace(/[^a-zA-Z0-9]/g, '');
 
-		country = "Canada";
 
-} else if (country == "USA"){
-		country ="US";
+hubspotInfo.id = org;
+hubspotInfo.label = org;
+
+hubspotInfo.hubspot_deal_id = inputData.hubspot_deal_id;
+hubspotInfo.hubspot_id = inputData.hubspot_id;
+
+const firstLevelOptionals = ['email', 'fax', 'phone'];
+
+for (var i = firstLevelOptionals.length - 1; i >= 0; i--) {
+    if (inputData.hasOwnProperty(firstLevelOptionals[i])) {
+        hubspotInfo[firstLevelOptionals[i]] = inputData[firstLevelOptionals[i]];
+    }
+}
+const addressOptions = ['langcode', 'given_name', 'family_name', 'organization', 'address_line1', 'locality', 'administrative_area', 'postal_code'];
+
+let address = {};
+
+
+
+for (var i = addressOptions.length - 1; i >= 0; i--) {
+    if (inputData.hasOwnProperty(addressOptions[i])) {
+        address[addressOptions[i]] = inputData[addressOptions[i]];
+    }
 }
 
+let countryCode = '';
+if (inputData.hasOwnProperty('country')) {
+    switch (inputData.country) {
+        case 'Canada':
+            countryCode = 'CA';
+        default:
+            countryCode = 'US';
+    }
+}
+
+if (countryCode.length) {
+    address.country_code = countryCode;
+}
+
+hubspotInfo.address = address;
+
+const exportJson = JSON.stringify(hubspotInfo);
 
 
-return { 
-	string: 'https://lucaccounts.force1.awdev.ca/site-creation?i='
-			+encodeURIComponent( 
-				Buffer.from(
-					
-					//inputData object is string data from zapier integration
-		`{
-                            "id": "${inputData.company}",
-                            "label": "${inputData.company}",
-                            "hubspot_deal_id": "${inputData.hubspot_deal_id}",
-                            "hubspot_id": "${inputData.hubspot_id}",
-                            "address": [
-                                {"country_code": "${country}"},
-                                {"langcode": ""},
-                                {"given_name": "${inputData.given_name}"},
-                                {"family_name": "${inputData.family_name}"},
-                                {"organization": "${inputData.company}"},
-                                {"address_line1": "${inputData.street_address}"},
-                                {"address_line2": ""},
-                                {"locality": "${inputData.city}"},
-                                {"administrative_area": "${inputData.state_region}"},
-                                {"postal_code": "${inputData.postal_zip}"}
-                                ],
-                            "email": "${inputData.email}",
-                            "fax": "${inputData.fax}",
-                            "phone": "${inputData.phone}"
-          }`		
-				).toString('base64')
-			)
-	};
+return {
+    string: 'https://lucaccounts.force1.awdev.ca/site-creation?i='
+            +encodeURIComponent(
+                Buffer.from(exportJson).toString('base64')
+            )
+    };
+
+
