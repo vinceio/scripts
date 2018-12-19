@@ -1,7 +1,7 @@
 var country = "CA";
 
 let hubspotInfo = {};
-let org = inputData.organization.replace(/[^a-zA-Z0-9]/g, '');
+let org = inputData.organization.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
 
 
 hubspotInfo.id = org;
