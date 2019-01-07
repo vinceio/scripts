@@ -1,9 +1,9 @@
 #!/bin/bash
-#prints public key finger prints from specified file
+#prints public key finger prints from specified key file
 
 Green='\033[0;32m'
 if [ "$#" -ne 1 ]; then
-		echo -e " Error! Specify Path to Public Keys: ${Green}fingerprint ~/path/to/key"
+		echo -e " Error! Specify Path to Public Key(s) file: ${Green}fingerprint ~/path/to/keys/file"
 		exit 1
 fi
 
