@@ -247,9 +247,10 @@ hubspotInfo.force_id = inputData.force_id;
 
 
 //Specify Subdomain Name
-//Default is ORG future versions may prompt user to specify
-hubspotInfo.subdomain = hubspotInfo.label;
-
+//If no subdomain provided default is Organization
+hubspotInfo.subdomain = (inputData.requested_subdomain || hubspotInfo.label)
+	.replace(/[^a-zA-Z0-9]/g, '')
+	.toLowerCase();
 
 //Specifying MD5 Secret
 secret = MD5(hubspotInfo.id + hubspotInfo.hubspot_deal_id);
