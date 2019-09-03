@@ -290,7 +290,7 @@ const exportJson = JSON.stringify(hubspotInfo);
 
 //Create Base64 encoded string then encoded as Uniform Resource Identifier(URI)
 return {
-    string: 'https://lucaccounts.force1.awdev.ca/site-creation?i='
+    string: 'https://devaccounts.aw.ca/site-creation?i='
             +encodeURIComponent(
                 Buffer.from(exportJson).toString('base64')
             )
