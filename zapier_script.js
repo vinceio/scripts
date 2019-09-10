@@ -3,9 +3,6 @@
 
     inputData.example_field is Zapier's data variable
     for specified data mapping.
-	LucasR & VinceP 2019
-	Advisor Websites
-
 
 *******************************************************************/
 
@@ -235,22 +232,21 @@ if (provinces.hasOwnProperty(inputData.administrative_area)){
 let hubspotInfo = {};
 
 //removes special characters then lower cases organization string
-let org = inputData.organization.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+let org = (inputData.organization || inputData.given_name +  inputData.family_name).replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
 
 hubspotInfo.id = org;
 hubspotInfo.label = org;
 
 hubspotInfo.hubspot_deal_id = inputData.hubspot_deal_id;
 hubspotInfo.hubspot_id = inputData.hubspot_id;
-hubspotInfo.braintree_id = inputData.braintree_id;
+hubspotInfo.chargebee_id = inputData.chargebee_id;
 hubspotInfo.force_id = inputData.force_id;
-
 
 //Specify Subdomain Name
 //If no subdomain provided default is Organization
 hubspotInfo.subdomain = (inputData.requested_subdomain || hubspotInfo.label)
-	.replace(/[^a-zA-Z0-9]/g, '')
-	.toLowerCase();
+    .replace(/[^a-zA-Z0-9]/g, '')
+    .toLowerCase();
 
 //Specifying MD5 Secret
 secret = MD5(hubspotInfo.id + hubspotInfo.hubspot_deal_id);
@@ -290,7 +286,7 @@ const exportJson = JSON.stringify(hubspotInfo);
 
 //Create Base64 encoded string then encoded as Uniform Resource Identifier(URI)
 return {
-    string: 'https://devaccounts.aw.ca/site-creation?i='
+    string: 'https://accounts.us1.advisor.ws/site-creation?i='
             +encodeURIComponent(
                 Buffer.from(exportJson).toString('base64')
             )
