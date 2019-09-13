@@ -234,12 +234,13 @@ let hubspotInfo = {};
 //removes special characters then lower cases organization string
 let org = (inputData.organization || inputData.given_name +  inputData.family_name).replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
 
-hubspotInfo.id = org;
+hubspotInfo.id = org + new Date().getTime();
 hubspotInfo.label = org;
 
 hubspotInfo.hubspot_deal_id = inputData.hubspot_deal_id;
 hubspotInfo.hubspot_id = inputData.hubspot_id;
-hubspotInfo.chargebee_id = inputData.chargebee_id;
+hubspotInfo.payment_billing_token = inputData.chargebee_id;
+hubspotInfo.payment_provider = 'Chargebee';
 hubspotInfo.force_id = inputData.force_id;
 
 //Specify Subdomain Name
